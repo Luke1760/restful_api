@@ -1,4 +1,4 @@
-class Api::V1::RegistersController < Devise::RegistersController
+class Api::V1::RegistersController < Devise::RegistrationsController
   before_action :ensure_user_params_exist, only: [:create]
 
   # user sign_up feature
