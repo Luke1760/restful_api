@@ -38,7 +38,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def valid_token
-    @user = User.find_by_authentication_token(request.headers["AUTH-TOKEN"])
+    @user = User.find_by authentication_token: request.headers["AUTH-TOKEN"]
     if @user.present?
       return @user
     else
