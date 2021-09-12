@@ -2,7 +2,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   before_action :sign_in_params, only: [:create]
   before_action :confirm_if_user_exists, only: [:create]
   before_action :valid_token, only: [:destroy]
-  skip_before_action :verify_signed_out_user, only: [:destroy]
+  # skip_before_action :verify_signed_out_user, only: [:destroy]
   
   # user sign_in feature
   def create
