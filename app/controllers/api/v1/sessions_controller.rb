@@ -16,7 +16,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   # user sign_out feature
   def destroy
     sign_out @user
-    @user = User.generate_new_authentication_token
+    @user = User.generate_unique_secure_token
     json_response("Sign Out Successfully!", true, {}, :ok)
   end
 
@@ -38,7 +38,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def valid_token
-    @user = User.find_by authentication_token: request.headers["AUTH-TOKEN"]
+    @user = User.find_by(authentication_token: request.headers["AUTH-TOKEN"])
     if @user.present?
       return @user
     else
