@@ -173,6 +173,7 @@ DEPENDENCIES
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.7)
+  rb-fsevent (~> 0.11.0)
   simple_token_authentication (~> 1.0)
   spring
   spring-watcher-listen (~> 2.0.0)
