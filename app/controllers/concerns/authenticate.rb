@@ -8,7 +8,7 @@ module Authenticate
   end
 
   def authentication_with_token!
-    return if current_user
+    return if current_user.present?
     json_response("Unauthenticated", false, {}, :unauthorized)
   end
 end
