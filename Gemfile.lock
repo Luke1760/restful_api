@@ -72,6 +72,8 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.10.0)
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
     faraday (1.7.2)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -198,6 +200,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   devise (~> 4.3)
+  faker
   koala (~> 3.0)
   listen (~> 3.2)
   puma (~> 4.1)
