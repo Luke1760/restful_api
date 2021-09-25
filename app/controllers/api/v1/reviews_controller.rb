@@ -1,7 +1,7 @@
 class Api::V1::ReviewsController < ApplicationController
   before_action :load_book, only: [:index]
-  before_action :load_review, only: [:show]
-  before_action :authentication_with_token!, only: [:create]
+  before_action :load_review, only: [:show, :update]
+  before_action :authentication_with_token!, only: [:create, :update]
 
   # reviews will be got from one book, because all reviews belongs_to one book.
   def index
@@ -26,7 +26,15 @@ class Api::V1::ReviewsController < ApplicationController
   end
 
   def update
-
+    if check_user_correct(@review.user)
+      if review.update(review_params)
+        json_response "Updated review successfully", true, {review: @review}, :ok
+      else
+        json_response "Updated review fail", false, {}, :unpreccessable_entity
+      end
+    else
+      json_response "You don't have permission to do this", false, {}, :unauthorized
+    end
   end
 
   def destroy
