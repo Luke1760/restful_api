@@ -11,4 +11,9 @@ module Authenticate
     return if current_user.present?
     json_response("Unauthenticated", false, {}, :unauthorized)
   end
+
+  # the user who rating should the same with current_user
+  def check_user_correct(user)
+    user.id == current_user.id
+  end
 end
