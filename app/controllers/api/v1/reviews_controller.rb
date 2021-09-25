@@ -1,6 +1,7 @@
 class Api::V1::ReviewsController < ApplicationController
   before_action :load_book, only: [:index]
   before_action :load_review, only: [:show]
+  before_action :authentication_with_token!, only: [:create]
 
   # reviews will be got from one book, because all reviews belongs_to one book.
   def index
@@ -12,8 +13,16 @@ class Api::V1::ReviewsController < ApplicationController
     json_response "Show review successfully", true, {review: @review}, :ok
   end
 
+  # need to sign_in before create a review
   def create
-
+    review = Review.new(review_params)
+    review.user_id == current_user.id
+    review.book_id == params[:book_id]
+    if review.save
+      json_response "Created review successfully", true, {review: review}, :ok
+    else
+      json_response "Created review fail", false, {}, :unprocessable_untity
+    end
   end
 
   def update
@@ -38,5 +47,9 @@ class Api::V1::ReviewsController < ApplicationController
     unless @review.present?
       json_response "Cannot find a review", false, {}, :not_found
     end
+  end
+
+  def review_params
+    params.require(:review).permit(:title, :content_rating, :recommend_rating)
   end
 end
