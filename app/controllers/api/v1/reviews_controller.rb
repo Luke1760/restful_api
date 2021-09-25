@@ -21,7 +21,7 @@ class Api::V1::ReviewsController < ApplicationController
     if review.save
       json_response "Created review successfully", true, {review: review}, :ok
     else
-      json_response "Created review fail", false, {}, :unprocessable_untity
+      json_response "Created review fail", false, {}, :unprocessable_entity
     end
   end
 
@@ -30,7 +30,7 @@ class Api::V1::ReviewsController < ApplicationController
       if @review.update(review_params)
         json_response "Updated review successfully", true, {review: @review}, :ok
       else
-        json_response "Updated review fail", false, {}, :unpreccessable_entity
+        json_response "Updated review fail", false, {}, :unprocessable_entity
       end
     else
       json_response "You don't have permission to do this", false, {}, :unauthorized
@@ -42,7 +42,7 @@ class Api::V1::ReviewsController < ApplicationController
       if @review.destroy
         json_response "Deleted review successfully", true, {}, :ok
       else
-        json_response "Deleted review fail", false, {}, :unproccessable_untity
+        json_response "Deleted review fail", false, {}, :unprocessable_entity
       end
     else
       json_response "You don't have permission to do this", false, {}, :unauthorized
