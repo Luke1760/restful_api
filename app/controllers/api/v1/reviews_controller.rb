@@ -1,7 +1,10 @@
 class Api::V1::ReviewsController < ApplicationController
-  
-  def index
+  before_action :load_book, only: [:index]
 
+  # reviews will be got from one book, because all reviews belongs_to one book.
+  def index
+    @reviews = @book.reviews
+    json_response "Index reviews successfully", true, {reviews: @reviews}, :ok
   end
 
   def show
