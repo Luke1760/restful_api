@@ -16,8 +16,8 @@ class Api::V1::ReviewsController < ApplicationController
   # need to sign_in before create a review
   def create
     review = Review.new(review_params)
-    review.user_id == current_user.id
-    review.book_id == params[:book_id]
+    review.user_id = current_user.id
+    review.book_id = params[:book_id]
     if review.save
       json_response "Created review successfully", true, {review: review}, :ok
     else
