@@ -52,7 +52,7 @@ class Api::V1::ReviewsController < ApplicationController
   private
 
   def load_book
-    @book = Book.find_by(id: params[:id])
+    @book = Book.find_by(id: params[:book_id])
     unless @book.present?
       json_response "Cannot find a book", false, {}, :not_found
     end
