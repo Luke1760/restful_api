@@ -20,6 +20,6 @@ class BookSerializer < ActiveModel::Serializer
   # end
 
   def total_reviews
-    object.reviews.count
+    object.reviews_count
   end
 end
