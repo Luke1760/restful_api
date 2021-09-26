@@ -6,29 +6,33 @@ class Api::V1::ReviewsController < ApplicationController
   # reviews will be got from one book, because all reviews belongs_to one book.
   def index
     @reviews = @book.reviews
-    json_response "Index reviews successfully", true, {reviews: @reviews}, :ok
+    reviews_serializer = parse_json(@reviews)
+    json_response "Index reviews successfully", true, {reviews: reviews_serializer}, :ok
   end
 
   def show
-    json_response "Show review successfully", true, {review: @review}, :ok
+    review_serializer = parse_json(@review)
+    json_response "Show review successfully", true, {review: review_serializer}, :ok
   end
 
   # need to sign_in before create a review
   def create
     review = Review.new(review_params)
+    review_serializer = parse_json(review)
     review.user_id = current_user.id
     review.book_id = params[:book_id]
     if review.save
-      json_response "Created review successfully", true, {review: review}, :ok
+      json_response "Created review successfully", true, {review: reviews_serializer}, :ok
     else
       json_response "Created review fail", false, {}, :unprocessable_entity
     end
   end
 
   def update
+    review_serializer = parse_json(@review)
     if check_user_correct(@review.user)
       if @review.update(review_params)
-        json_response "Updated review successfully", true, {review: @review}, :ok
+        json_response "Updated review successfully", true, {review: review_serializer}, :ok
       else
         json_response "Updated review fail", false, {}, :unprocessable_entity
       end
