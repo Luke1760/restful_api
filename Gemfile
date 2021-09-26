@@ -35,7 +35,7 @@ gem 'koala', '~> 3.0'
 
 gem 'faker'
 
-gem 'active_model_serializers', '~> 0.10.0'
+gem 'active_model_serializers', '~> 0.10.0', require: true
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
